@@ -315,8 +315,7 @@ mod day_one {
 
         let (f, s, t) = highest_sums;
         let top_three = f + s + t;
-        println!("{:?}", highest_sums);
-        println!("{:?}", top_three);
+        assert_eq!(top_three, 206289);
     }
 
     fn read_file(filepath: &str) -> Vec<Vec<i32>> {
