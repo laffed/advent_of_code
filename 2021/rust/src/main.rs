@@ -4,6 +4,66 @@ use std::io::{BufRead, BufReader};
 fn main() {
     println!("Hello, world!");
 }
+#[cfg(test)]
+mod day_two {
+    use super::*;
+
+    #[test]
+    fn two_two() {}
+
+    #[test]
+    fn two_one() {
+        let commands = read_input();
+        let mut x = 0;
+        let mut z = 0;
+
+        for command in commands.iter() {
+            match command {
+                CommandVector::Forward(d) => x += d,
+                CommandVector::Up(d) => z -= d,
+                CommandVector::Down(d) => z += d,
+                _ => {}
+            }
+        }
+
+        let res = x * z;
+        assert_eq!(res, 2036120);
+    }
+
+    #[derive(Debug, PartialEq)]
+    enum CommandVector {
+        Forward(isize),
+        Up(isize),
+        Down(isize),
+        Unknown,
+    }
+
+    fn read_input() -> Vec<CommandVector> {
+        let mut res = Vec::new();
+        let file = File::open("input/day_two.txt").expect("File not found");
+        let reader = BufReader::new(file);
+
+        for line in reader.lines() {
+            let line = line.unwrap();
+            let vector: Vec<&str> = line.split(' ').collect();
+            let dir = vector[0];
+            let mag = vector[1]
+                .parse::<isize>()
+                .expect("could not parse command magnitude");
+
+            let command = match dir {
+                "forward" => CommandVector::Forward(mag),
+                "up" => CommandVector::Up(mag),
+                "down" => CommandVector::Down(mag),
+                _ => CommandVector::Unknown,
+            };
+
+            res.push(command);
+        }
+
+        res
+    }
+}
 
 #[cfg(test)]
 mod day_one {
