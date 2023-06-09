@@ -47,8 +47,8 @@ mod day_three {
             })
             .collect::<String>();
 
-        let gamma_dec = u32::from_str_radix(&gamma, 2).expect("could not parse gamma str");
-        let epsilon_dec = u32::from_str_radix(&epsilon, 2).expect("could not parse epsilon str");
+        let gamma_dec = usize::from_str_radix(&gamma, 2).expect("could not parse gamma str");
+        let epsilon_dec = usize::from_str_radix(&epsilon, 2).expect("could not parse epsilon str");
 
         let res = gamma_dec * epsilon_dec;
 
