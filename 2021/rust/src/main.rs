@@ -9,7 +9,34 @@ mod day_two {
     use super::*;
 
     #[test]
-    fn two_two() {}
+    fn two_two() {
+        /*
+        down X increases your aim by X units.
+        up X decreases your aim by X units.
+        forward X does two things:
+        It increases your horizontal position by X units.
+        It increases your depth by your aim multiplied by X.
+        */
+        let commands = read_input();
+        let mut rad = 0;
+        let mut x = 0;
+        let mut z = 0;
+
+        for command in commands.iter() {
+            match command {
+                CommandVector::Up(d) => rad -= d,
+                CommandVector::Down(d) => rad += d,
+                CommandVector::Forward(d) => {
+                    x += d;
+                    z += d * rad;
+                }
+                _ => {}
+            }
+        }
+
+        let res = x * z;
+        assert_eq!(res, 2015547716);
+    }
 
     #[test]
     fn two_one() {
@@ -19,9 +46,9 @@ mod day_two {
 
         for command in commands.iter() {
             match command {
-                CommandVector::Forward(d) => x += d,
                 CommandVector::Up(d) => z -= d,
                 CommandVector::Down(d) => z += d,
+                CommandVector::Forward(d) => x += d,
                 _ => {}
             }
         }
