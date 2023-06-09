@@ -4,6 +4,74 @@ use std::io::{BufRead, BufReader};
 fn main() {
     println!("Hello, world!");
 }
+
+#[cfg(test)]
+mod day_three {
+    use super::*;
+
+    #[derive(Clone, Debug)]
+    struct BitPositionQuant {
+        one: usize,
+        zero: usize,
+    }
+
+    #[test]
+    fn three_one() {
+        let lists = read_input();
+        let mut record: Vec<BitPositionQuant> =
+            vec![BitPositionQuant { one: 0, zero: 0 }; lists[0].len()];
+
+        for list in lists {
+            for (i, c) in list.iter().enumerate() {
+                match c {
+                    '1' => record[i].one += 1,
+                    '0' => record[i].zero += 1,
+                    _ => {}
+                }
+            }
+        }
+
+        let gamma = record
+            .iter()
+            .map(|bp| match bp.one > bp.zero {
+                true => '1',
+                false => '0',
+            })
+            .collect::<String>();
+
+        let epsilon = record
+            .iter()
+            .map(|bp| match bp.one > bp.zero {
+                true => '0',
+                false => '1',
+            })
+            .collect::<String>();
+
+        let gamma_dec = u32::from_str_radix(&gamma, 2).expect("could not parse gamma str");
+        let epsilon_dec = u32::from_str_radix(&epsilon, 2).expect("could not parse epsilon str");
+
+        let res = gamma_dec * epsilon_dec;
+
+        println!("Gamma: {} >> {}", gamma, gamma_dec);
+        println!("Epsilon: {} >> {}", epsilon, epsilon_dec);
+        assert_eq!(res, 3374136);
+    }
+
+    fn read_input() -> Vec<Vec<char>> {
+        let mut res = Vec::new();
+        let file = File::open("input/day_three.txt").expect("could not read day three input");
+        let reader = BufReader::new(file);
+
+        for line in reader.lines() {
+            let line = line.unwrap();
+            let row = line.chars().collect();
+            res.push(row);
+        }
+
+        res
+    }
+}
+
 #[cfg(test)]
 mod day_two {
     use super::*;
