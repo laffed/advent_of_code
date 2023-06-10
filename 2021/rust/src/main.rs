@@ -4,10 +4,57 @@ use std::io::{BufRead, BufReader};
 fn main() {
     println!("Hello, world!");
 }
+#[cfg(test)]
+mod day_four {
+    use super::*;
+
+    #[test]
+    fn four_one() {
+        assert_eq!(true, false);
+    }
+
+    type Board = [[u32; 5]; 5];
+
+    #[derive(Debug)]
+    struct FourInput {
+        instructions: Vec<u32>,
+        boards: Vec<Board>,
+    }
+
+    fn read_input() -> FourInput {
+        let file = File::open("input/day_four_test.txt").expect("could not read day four input");
+        let reader = BufReader::new(file);
+
+        let mut instructions = Vec::new();
+        let mut boards: Vec<Board> = Vec::new();
+
+        for (i, line) in reader.lines().enumerate() {}
+
+        FourInput {
+            instructions,
+            boards,
+        }
+    }
+}
 
 #[cfg(test)]
 mod day_three {
     use super::*;
+
+    #[test]
+    fn three_two() {
+        /*
+        O2:
+        - determine the MOST common value in the current bit position
+        - keep only numbers with that bit in that position
+        - if 0 and 1 are equally common, keep values with a 1 in the position
+
+        CO2:
+        - determine the LEAST common value in the current bit position
+        - keep only numbers with that bit in that position
+        - if 0 and 1 are equally common, keep values with a 0 in the position
+        */
+    }
 
     #[derive(Clone, Debug)]
     struct BitPositionQuant {
