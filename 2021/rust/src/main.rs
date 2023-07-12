@@ -28,7 +28,13 @@ mod day_four {
         let mut instructions = Vec::new();
         let mut boards: Vec<Board> = Vec::new();
 
-        for (i, line) in reader.lines().enumerate() {}
+        for (i, line) in reader.lines().enumerate() {
+            let line = line.unwrap();
+            if i == 0 {
+                instructions = line.split(',').map(|x| x.parse::<u32>().unwrap()).collect();
+                continue;
+            }
+        }
 
         FourInput {
             instructions,
