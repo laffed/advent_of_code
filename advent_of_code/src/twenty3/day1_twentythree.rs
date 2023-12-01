@@ -48,9 +48,9 @@ const STR_DIGITS: [(&str, usize); 18] = [
 
 fn helper(s: &str, rev: bool) -> usize {
     let mut matches: Vec<(usize, usize)> = vec![];
-    for tup in STR_DIGITS.into_iter() {
-        if let Some(order) = s.find(tup.0) {
-            matches.push((order, tup.1))
+    for (word, d) in STR_DIGITS.into_iter() {
+        if let Some(order) = s.find(word) {
+            matches.push((order, d))
         }
     }
 
@@ -104,5 +104,20 @@ mod tests {
     #[test]
     fn p2_solution() {
         assert_eq!(solution_p2("inputs/twenty3/d1.txt"), 0);
+    }
+
+    #[test]
+    fn test_test() {
+        assert_eq!(helper("1abc2", false), 1);
+        assert_eq!(helper("1abc2", true), 2);
+        assert_eq!(helper("pqr3stu8vwx", false), 3);
+        assert_eq!(helper("pqr3stu8vwx", true), 8);
+        assert_eq!(helper("a1b2c3d4e5f", false), 1);
+        assert_eq!(helper("a1b2c3d4e5f", true), 5);
+        assert_eq!(helper("treb7uchet", false), 7);
+        assert_eq!(helper("treb7uchet", true), 7);
+        // assert_eq!(helper("pqr3stu8vwx"), Some(38));
+        // assert_eq!(helper("a1b2c3d4e5f"), Some(15));
+        // assert_eq!(helper("treb7uchet"), Some(77));
     }
 }
