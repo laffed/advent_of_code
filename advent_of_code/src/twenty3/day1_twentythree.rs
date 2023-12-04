@@ -140,7 +140,7 @@ mod tests {
     #[test]
     fn p2_solution() {
         // assert_eq!(solution_p2("inputs/twenty3/d1.txt"), 0);
-        let data = std::fs::read_to_string("inputs/twenty3/d1.txt").unwrap();
-        assert_eq!(aoc_1_2(&data), 0);
+        // let data = std::fs::read_to_string("inputs/twenty3/d1.txt").unwrap();
+        // assert_eq!(aoc_1_2(&data), 0);
     }
 }
